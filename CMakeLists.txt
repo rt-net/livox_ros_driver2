@@ -257,14 +257,21 @@ else(ROS_EDITION STREQUAL "ROS2")
     "${CMAKE_CURRENT_SOURCE_DIR}/../Livox-SDK2/include"
   )
 
+  set(LIVOX_LIDAR_SDK_LIBRARY_NAMES
+    livox_sdk_shared
+    livox_lidar_sdk_shared
+    livox_sdk_static
+    livox_lidar_sdk_static
+  )
+
   ## Support both system-installed SDK and a colcon-built SDK in the same workspace.
   find_library(LIVOX_LIDAR_SDK_LIBRARY
-    NAMES livox_lidar_sdk_shared
+    NAMES ${LIVOX_LIDAR_SDK_LIBRARY_NAMES}
     PATHS ${LIVOX_LIDAR_SDK_LIBRARY_HINTS}
     NO_DEFAULT_PATH)
   if(NOT LIVOX_LIDAR_SDK_LIBRARY)
     find_library(LIVOX_LIDAR_SDK_LIBRARY
-      NAMES livox_lidar_sdk_shared
+      NAMES ${LIVOX_LIDAR_SDK_LIBRARY_NAMES}
       REQUIRED)
   endif()
 
